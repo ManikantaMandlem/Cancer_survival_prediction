@@ -1,0 +1,40 @@
+project_name: "ECE_495_Project"
+
+data:
+  csv_meta_path: "/home/mmandlem/ece_495/data/dataset_ece495_2022.csv"
+  base_path: "/home/mmandlem/ece_495/data"
+  n_workers: 0
+  n_classes: 1
+  gender_list: ['male','female']
+  mutant_list: ['IDHmut-non-codel', 'IDHwt', 'IDHmut-codel']
+  label_list: ['TRUE',"FALSE"]
+  transform: False
+  remove_blank: False
+  
+
+model:
+  name: "cancer_survival_prediction"
+  exp_version: v006
+  exp_tags:
+    - efficientnet_v2_s
+    - no genomic data
+  base_model: "efficientnet_v2_s"
+  pretrained: "IMAGENET1K_V1"
+  finetune: True
+  genomic: False
+
+train:
+  batch_size: 1
+  epochs: 10
+  base_lr: 0.00001
+  max_lr: 0.001
+  class_weights: [1.0,1.0]
+  shuffle: True
+
+early_stopping:
+  tolerance: 10
+  min_delta: 0
+
+
+misc:
+  checkpoint_path: "/home/mmandlem/ece_495/checkpoints"
